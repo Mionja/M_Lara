@@ -1,4 +1,8 @@
 <?php
+/**
+ * @author RANAIVOARISON MIONJA
+ * 
+ */
 
 namespace App\Http\Controllers;
 
@@ -8,7 +12,29 @@ use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
-    // Show Register/Create Form
+     // Show Login Form
+     public function login() 
+     {
+         return view('users.login');
+     }
+ 
+     // Authenticate User
+     public function authenticate(Request $request) 
+     {
+         $formFields = $request->validate([
+             'email' => ['required', 'email'],
+             'password' => 'required'
+         ]);
+ 
+         if(auth()->attempt($formFields)) {
+             $request->session()->regenerate();
+             return redirect()->route('task.index')->with('success', 'You are now logged in!');
+         }
+ 
+         return back()->withErrors(['email' => 'Invalid Credentials'])->onlyInput('email');
+     }
+
+    // Show Register Form
     public function create() 
     {
         return view('users.register');
@@ -20,19 +46,19 @@ class UserController extends Controller
         $formFields = $request->validate([
             'name' => ['required', 'min:3'],
             'email' => ['required', 'email', Rule::unique('users', 'email')],
-            'password' => 'required|confirmed|min:6'
+            'password_confirmed' => 'required|same:password',
         ]);
 
         // Hash Password
-        $formFields['password'] = bcrypt($formFields['password']);
-
+        $formFields['password'] = bcrypt($request->password);
+        
         // Create User
         $user = User::create($formFields);
 
         // Login
         auth()->login($user);
 
-        return redirect('/')->with('message', 'User created and logged in');
+        return redirect()->route('login')->with('success', 'User created and log in');
     }
 
     // Logout User
@@ -43,30 +69,7 @@ class UserController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/')->with('message', 'You have been logged out!');
+        return redirect()->route('login')->with('warning', 'You have been logged out!');
 
-    }
-
-    // Show Login Form
-    public function login() 
-    {
-        return view('users.login');
-    }
-
-    // Authenticate User
-    public function authenticate(Request $request) 
-    {
-        $formFields = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => 'required'
-        ]);
-
-        if(auth()->attempt($formFields)) {
-            $request->session()->regenerate();
-
-            return redirect('/')->with('success', 'You are now logged in!');
-        }
-
-        return back()->withErrors(['email' => 'Invalid Credentials'])->onlyInput('email');
     }
 }

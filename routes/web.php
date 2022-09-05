@@ -1,46 +1,28 @@
 <?php
 
-use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TaskController;
+use App\Http\Controllers\UserController;
 
 
-// All tasks
-Route::get('/', [TaskController::class, 'index']);
+// Show Login Form
+Route::get('/', [UserController::class, 'login'])->name('login');
 
-// Show Create Form
-Route::get('/tasks/create', [TaskController::class, 'create'])->middleware('auth');
+// Log In User
+Route::post('/authenticate', [UserController::class, 'authenticate'])->name('authenticate');
 
-// Store task Data
-Route::post('/tasks', [TaskController::class, 'store'])->middleware('auth');
+// Show Register/Create Form
+Route::get('/register', [UserController::class, 'create'])->name('register');
 
-// Show Edit Form
-Route::get('/tasks/{task}/edit', [TaskController::class, 'edit'])->middleware('auth');
+// Create New User
+Route::post('/users', [UserController::class, 'store'])->name('store_user');
 
-// Update task
-Route::put('/tasks/{task}', [TaskController::class, 'update'])->middleware('auth');
+// Log User Out
+Route::post('/logout', [UserController::class, 'logout'])->name('logout')->middleware('auth');
 
-// Delete task
-Route::delete('/tasks/{task}', [TaskController::class, 'destroy'])->middleware('auth');
+
+
+Route::resource('task', TaskController::class)->middleware('auth');
 
 // Manage tasks
 Route::get('/tasks/manage', [TaskController::class, 'manage'])->middleware('auth');
-
-// Single task
-Route::get('/tasks/{task}', [TaskController::class, 'show']);
-
-
-
-// Show Register/Create Form
-Route::get('/register', [UserController::class, 'create'])->middleware('guest');
-
-// Create New User
-Route::post('/users', [UserController::class, 'store']);
-
-// Log User Out
-Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
-
-// Show Login Form
-Route::get('/login', [UserController::class, 'login'])->name('login')->middleware('guest');
-
-// Log In User
-Route::post('/users/authenticate', [UserController::class, 'authenticate']);
