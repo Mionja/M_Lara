@@ -11,6 +11,7 @@ class Task extends Model
 
     protected $fillable = [
         'title',
+        'user_id',
         'urgency_level',
         'description',
     ];
@@ -32,8 +33,8 @@ class Task extends Model
     }
 
     //Relationship to user
-    // public function user()
-    // {
-    //     return $this->belongsTo(User::class, 'user_id');
-    // }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

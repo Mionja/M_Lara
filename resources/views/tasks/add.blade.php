@@ -17,6 +17,7 @@
 
                 <form action="{{route('task.store')}}" method="POST">
                     @csrf
+                    <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
                     <div class="input-group mt-5">
                         <input class="input--style-2 @error('title') is-invalid @enderror" placeholder="Title" name="title" value="{{old('title')}}">
                     </div>

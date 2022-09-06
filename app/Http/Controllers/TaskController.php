@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -10,7 +11,8 @@ class TaskController extends Controller
     //List of all tasks
     public function index()
     {
-        $tasks = Task::all();
+        $tasks = Task::with('User')->where('user_id', auth()->user()->id)->get();
+        // $tasks = Task::all();
         return view('home', compact('tasks'));
     }
 
@@ -25,6 +27,7 @@ class TaskController extends Controller
     {
         $formFields = $request->validate([
                     'title' => 'required',
+                    'user_id' => 'required',
                     'description' => 'required'
                 ]);
         
@@ -40,8 +43,7 @@ class TaskController extends Controller
             $formFields['urgency_level'] = 'Not';
         }
 
-
-        // $formFields['user_id'] = auth()->id();
+        // dd($formFields);
 
         Task::create($formFields);
 
