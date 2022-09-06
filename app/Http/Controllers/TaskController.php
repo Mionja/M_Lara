@@ -7,14 +7,10 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        return view('home', 
-        [
-            'tasks' => Task::latest()
-                                    ->filter(request(['urgency_level', 'search']))
-                                    ->paginate(6)
-        ]);
+        $tasks = Task::all();
+        return view('home', compact('tasks'));
     }
 
     public function create()
@@ -24,7 +20,7 @@ class TaskController extends Controller
 
     public function store(Request $request)
     {
-        //
+       //
     }
 
     public function show($id)
@@ -51,6 +47,23 @@ class TaskController extends Controller
     {
         //
     }
+
+    public function search(Request $request)
+    {
+        $search = $request->search;
+
+        $tasks = Task::query()
+                            ->where('title', 'like', "%{$search}%") 
+                            // ->orWhere('description', 'like', "%{$search}%")
+                            ->orderBy('created_at', 'desc')
+                            ->get();
+        // dd($tasks);
+
+        return view('home', [
+            'tasks' => $tasks
+        ]);
+    }
+
 }
 
     // //Show single listing

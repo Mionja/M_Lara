@@ -1,4 +1,4 @@
-<form action="{{route('task.index')}}" method="POST">
+<form action="{{route('search')}}" method="POST" role="search">
 @csrf
     <div class="relative border-2 border-dark m-4 rounded-lg">
         <img src="{{asset('img/search.png')}}" alt="" class="ml-5" width="25">

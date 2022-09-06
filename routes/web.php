@@ -24,5 +24,8 @@ Route::post('/logout', [UserController::class, 'logout'])->name('logout')->middl
 
 Route::resource('task', TaskController::class)->middleware('auth');
 
+// Search tasks
+Route::post('/task/search', [TaskController::class, 'search'])->name('search')->middleware('auth');
+
 // Manage tasks
 Route::get('/tasks/manage', [TaskController::class, 'manage'])->middleware('auth');
