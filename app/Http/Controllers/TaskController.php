@@ -7,42 +7,96 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
+    //List of all tasks
     public function index()
     {
         $tasks = Task::all();
         return view('home', compact('tasks'));
     }
 
+    //Add task form
     public function create()
     {
-        //
+        return view('tasks.add');
     }
 
+    //Storing new task
     public function store(Request $request)
     {
-       //
+        $formFields = $request->validate([
+                    'title' => 'required',
+                    'description' => 'required'
+                ]);
+        
+        if($request->limit) {
+            $formFields['limit'] = $request->limit;
+        }
+
+        if($request->urgency_level) 
+        {
+            $formFields['urgency_level'] = $request->urgency_level;
+        }
+        else {
+            $formFields['urgency_level'] = 'Not';
+        }
+
+
+        // $formFields['user_id'] = auth()->id();
+
+        Task::create($formFields);
+
+        return redirect()->route('task.index')->with('success', 'Task created successfully!');
     }
 
+    //Show a specified task
     public function show($id)
     {
-        //
+        $task = Task::find($id);
+        return view('tasks.detail', compact('task'));
     }
 
+    //Editing a specified task
     public function edit($id)
     {
-        //
+        $task = Task::find($id);
+        return view('tasks.edit', compact('task'));
     }
 
+    //Updating a specified task
     public function update(Request $request, $id)
     {
-        //
+        $formFields = $request->validate([
+            'title' => 'required',
+            'description' => 'required'
+        ]);
+
+        if($request->limit) {
+            $formFields['limit'] = $request->limit;
+        }
+
+        if($request->urgency_level) 
+        {
+            $formFields['urgency_level'] = $request->urgency_level;
+        }
+        else 
+        {
+            $formFields['urgency_level'] = 'Not';
+        }
+
+        $task = Task::find($id);
+        $task-> update($formFields);
+
+        return redirect()->route('task.index')->with('warning', 'Task edited successfully!');
+
     }
 
+    //Delete a specified task
     public function destroy($id)
     {
         //
     }
 
+    //View which shows all possible actions on tasks
     public function manage()
     {
         //

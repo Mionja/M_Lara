@@ -11,7 +11,7 @@
             Find or post new task 
         </p>
         <div>
-            <a href="" class=" btn btn-outline-dark inline-block border-2 py-2 px-4 rounded-xl uppercase mt-2 hover:text-black hover:border-black mb-3">
+            <a href="{{route('task.create')}}" class=" btn btn-outline-dark inline-block border-2 py-2 px-4 rounded-xl uppercase mt-2 hover:text-black hover:border-black mb-3">
                 Add a task</a>
         </div>
     </div>

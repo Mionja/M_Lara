@@ -1,6 +1,6 @@
   <header class="d-block">
     <nav class="navbar navbar-expand-lg navbar-default bg-dark">
-        <a class="navbar-brand text-light" href="#" style="font-family: 'Oleo Script Swash Caps', 'cursive'; font-size:1.8em;">
+        <a class="navbar-brand text-light" href="{{route('task.index')}}" style="font-family: 'Oleo Script Swash Caps', 'cursive'; font-size:1.8em;">
             <img src="{{asset('img/logo1.png')}}" alt="" width="50">
         </a>
 

@@ -8,7 +8,7 @@
                 @csrf
 
                 <div class="text-center mt-3">
-                    <img class="mb-4" src="{{asset('img/m.png')}}" alt="logo" width="72" height="72">
+                    <img class="mb-4" src="{{asset('img/manage.png')}}" alt="logo" width="72" height="72">
                 </div>
 
                 <div class="input-group mb-3">

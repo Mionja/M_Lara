@@ -6,7 +6,7 @@
         <form action="{{route('authenticate')}}" method="POST" class="form-signin center bordered">
             @csrf
             <div class="text-center mt-4">
-                <img class="mb-4" src="{{asset('img/m.png')}}" alt="logo" width="72" height="72">
+                <img class="mb-4" src="{{asset('img/manage.png')}}" alt="logo" width="72" height="72">
             </div>
             <div class="text-center">
                 <p>Planning</p>
