@@ -8,8 +8,8 @@
 
 @foreach($tasks as $task)
 <div class="row">   
-    <div class="col-3"></div>
-    <div class="col-6 ml-5 mb-3 " style="width:50%; border:1px solid rgb(168, 158, 158);border-radius:10px">
+    <div class="col-4"></div>
+    <div class="col-3 ml-5 mb-3 " style=" border:1px solid rgb(168, 158, 158);border-radius:10px">
         <h3 class="text-center">
             <form action="{{route(  'task.show', $task->id  )}}">
                 @csrf
