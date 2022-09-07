@@ -28,4 +28,4 @@ Route::resource('task', TaskController::class)->middleware('auth');
 Route::post('/task/search', [TaskController::class, 'search'])->name('search')->middleware('auth');
 
 // Manage tasks
-Route::get('/tasks/manage', [TaskController::class, 'manage'])->middleware('auth');
+Route::get('/tasks/manage', [TaskController::class, 'manage'])->name('manage')->middleware('auth');

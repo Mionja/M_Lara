@@ -37,8 +37,8 @@
                          <span class="mb-3 mr-3" style="font-size:16px">Level of urgency:</span>
                          <select name="urgency_level" class="input--style-2">
                                 <option value="" selected></option>
-                                <option value="not">Can wait</option>
                                 <option value="less">Less important</option>
+                                <option value="quite">Quite important</option>
                                 <option value="very">Very important</option>
                          </select>
                     </div>

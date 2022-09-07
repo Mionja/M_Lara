@@ -13,9 +13,8 @@
   </head>
 
   <body>
-@include('flash-message')
 @yield('main')
-    
+@include('flash-message')
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/datepicker.js') }}"></script>
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>

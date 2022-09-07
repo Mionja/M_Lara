@@ -7,7 +7,7 @@
         <div class="collapse navbar-collapse" id="navbarToggler">
             <ul class="navbar-nav ml-auto ">
                 <li class="nav-item mr-5">
-                    <a class="nav-link text-light" href="#">
+                    <a class="nav-link text-light" href="{{route('manage')}}">
                         <img src="{{asset('img/manage.png')}}" alt="" style="" width="25">
                         Manage your tasks</a>
                 </li>         

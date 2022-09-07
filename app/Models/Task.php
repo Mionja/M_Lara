@@ -16,22 +16,6 @@ class Task extends Model
         'description',
     ];
 
-    public function scopeFilter($query, array $filters) 
-    {
-        if($filters['urgency_level'] ?? false) 
-        {
-            $query->where('urgency_level', 'like', '%' . request('urgency_level') . '%');
-        }
-
-        if($filters['search'] ?? false) 
-        {
-            $query->where('title', 'like', '%' . request('search') . '%')
-                ->orWhere('urgency_level', 'like', '%' . request('search') . '%')
-                ->orWhere('description', 'like', '%' . request('search') . '%')
-                ->orWhere('limit', 'like', '%' . request('search') . '%');
-        }
-    }
-
     //Relationship to user
     public function user()
     {

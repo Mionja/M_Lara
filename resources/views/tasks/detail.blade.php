@@ -3,9 +3,15 @@
 @section('main')
 @include('includes._navbar')
 
-<div class="jumbotron text-dark" style="background-color: darkgray">
+@if(  $task->urgency_level == 'very')
+<div class="jumbotron text-dark" style="background-color: rgb(207, 119, 112)">
     <h2 class="text-center mt-2">{{ $task->title }}</h2>
-    <code class="text-danger">[ {{ $task->urgency_level }} important, 
+    <code class="text-light" style="font-size: 17px">[ {{ $task->urgency_level }} important, 
+@else
+<div class="jumbotron text-dark" style="background-color: light">
+    <h2 class="text-center mt-2">{{ $task->title }}</h2>
+    <code class="text-danger" style="font-size: 17px">[ {{ $task->urgency_level }} important, 
+@endif
         @if($task->limit)
             Time limit: {{ $task->limit }}    
         @else
